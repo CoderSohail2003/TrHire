@@ -11,7 +11,7 @@ export const generateFollowUpEmail =
     const res =
       await axios.post(
 
-        '/api/gemini/followup-email',
+        '/api/gemini/followup',
 
         job,
 

@@ -27,7 +27,7 @@ router.post(
 
       const model =
         genAI.getGenerativeModel({
-          model: 'models/gemini-2.0-flash'
+          model: 'gemini-3.8-flash'
         });
 
       const prompt = `

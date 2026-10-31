@@ -26,6 +26,7 @@ import {
 } from 'lucide-react';
 
 import heroImg from '../assets/hero_img.png';
+import Loader from '../Components/Loader';
 
 export default function Dashboard({
 
@@ -38,6 +39,8 @@ export default function Dashboard({
 
   const [generatedEmail, setGeneratedEmail] =
   useState('');
+  const [loadingFollowUpId, setLoadingFollowUpId] =
+  useState(null);
 
   // ─────────────────────────────────────────────
   // LOGIN CHECK
@@ -54,6 +57,8 @@ export default function Dashboard({
   const generateFollowUpEmail =
   async (job) => {
 
+    setLoadingFollowUpId(job.id);
+
     try {
 
       const token =
@@ -64,7 +69,7 @@ export default function Dashboard({
       const res =
         await axios.post(
 
-          'http://localhost:5000/api/gemini/followup',
+          '/api/gemini/followup',
 
           {
             company:
@@ -99,6 +104,8 @@ export default function Dashboard({
       alert(
         'Failed to generate email'
       );
+    } finally {
+      setLoadingFollowUpId(null);
     }
   };
 
@@ -754,9 +761,13 @@ const followUpsNeeded =
   onClick={() =>
     generateFollowUpEmail(job)
   }
-  className="h-10 w-10 bg-rose-50 text-rose-600 rounded-full flex items-center justify-center"
+  disabled={loadingFollowUpId !== null}
+  aria-label={loadingFollowUpId === job.id ? 'Generating follow-up email' : 'Generate follow-up email'}
+  className="h-10 w-10 bg-rose-50 text-rose-600 rounded-full flex items-center justify-center disabled:cursor-wait"
 >
-  <ArrowUpRight size={18} />
+  {loadingFollowUpId === job.id
+    ? <Loader color="bg-rose-600" size="h-1.5 w-1.5" />
+    : <ArrowUpRight size={18} />}
 </button>
 
                           </div>

@@ -1,16 +1,44 @@
-# React + Vite
+# TrackHire
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TrackHire is a React/Vite job application tracker with an Express API, MongoDB, and Gemini-powered follow-up email generation.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Install the client and server dependencies:
 
-## React Compiler
+   ```sh
+   npm --prefix client install
+   npm --prefix server install
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. Create `server/.env` with:
 
-## Expanding the ESLint configuration
+   ```env
+   MONGO_URI=your_mongodb_connection_string
+   JWT_SECRET=your_long_random_secret
+   GEMINI_API_KEY=your_gemini_api_key
+   PORT=5000
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+3. Start the API and frontend in separate terminals:
+
+   ```sh
+   npm --prefix server start
+   npm --prefix client run dev
+   ```
+
+The Vite development server proxies `/api` requests to the local Express server.
+
+## Deploy to Vercel
+
+Deploy the `TrackHire_SEM2` repository root as one Vercel project. The Vercel configuration builds the Vite app from `client`, serves the `client/dist` output, and routes `/api/*` to the Express function in `api/index.js`.
+
+In the Vercel project settings, add these environment variables for Production (and Preview if needed):
+
+- `MONGO_URI`
+- `JWT_SECRET`
+- `GEMINI_API_KEY`
+
+Do not add secrets to `VITE_` variables or commit `.env` files. Configure MongoDB Atlas network access for the deployed application and ensure the Gemini API key/model are enabled for your account.
+
+Applications store only the resume filename. The selected PDF itself is not uploaded or persisted.

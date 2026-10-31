@@ -125,7 +125,7 @@ function MainApp() {
 
           const jobsRes =
             await axios.get(
-              'http://localhost:5000/api/jobs',
+              '/api/jobs',
               {
                 headers: {
                   Authorization:
@@ -136,7 +136,7 @@ function MainApp() {
 
           const trashRes =
             await axios.get(
-              'http://localhost:5000/api/trash',
+              '/api/trash',
               {
                 headers: {
                   Authorization:
@@ -189,7 +189,7 @@ function MainApp() {
         const res =
           await axios.put(
 
-            `http://localhost:5000/api/jobs/${id}`,
+            `/api/jobs/${id}`,
 
             {
               isPinned:
@@ -241,7 +241,7 @@ function MainApp() {
         const res =
           await axios.post(
 
-            'http://localhost:5000/api/jobs',
+            '/api/jobs',
 
             jobData,
 
@@ -294,7 +294,7 @@ function MainApp() {
         const res =
           await axios.put(
 
-            `http://localhost:5000/api/jobs/${editingJob._id}`,
+            `/api/jobs/${editingJob._id}`,
 
             updatedData,
 
@@ -361,7 +361,7 @@ function MainApp() {
 
         await axios.delete(
 
-          `http://localhost:5000/api/jobs/${deleteConfirmJobId}`,
+          `/api/jobs/${deleteConfirmJobId}`,
 
           {
             headers: {
@@ -383,7 +383,7 @@ function MainApp() {
 
         const trashRes =
           await axios.get(
-            'http://localhost:5000/api/trash',
+            '/api/trash',
             {
               headers: {
                 Authorization:
@@ -430,7 +430,7 @@ function MainApp() {
         const res =
           await axios.post(
 
-            `http://localhost:5000/api/trash/${id}/restore`,
+            `/api/trash/${id}/restore`,
 
             {},
 
@@ -481,7 +481,7 @@ function MainApp() {
 
         await axios.delete(
 
-          `http://localhost:5000/api/trash/${id}`,
+          `/api/trash/${id}`,
 
           {
             headers: {

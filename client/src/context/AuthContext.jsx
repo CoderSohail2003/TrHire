@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
   // ─────────────────────────────────────────────
   const login = async (email, password) => {
     const response = await fetch(
-      'http://localhost:5000/api/auth/login',
+      '/api/auth/login',
       {
         method: 'POST',
         headers: {
@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }) => {
   // ─────────────────────────────────────────────
   const register = async (formData) => {
     const response = await fetch(
-      'http://localhost:5000/api/auth/register',
+      '/api/auth/register',
       {
         method: 'POST',
         headers: {
