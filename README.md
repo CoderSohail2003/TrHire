@@ -31,7 +31,7 @@ The Vite development server proxies `/api` requests to the local Express server.
 
 ## Deploy to Vercel
 
-Deploy the `TrackHire_SEM2` repository root as one Vercel project. The Vercel configuration builds the Vite app from `client`, serves the `client/dist` output, and routes `/api/*` to the Express function in `api/index.js`.
+Deploy the `TrackHire_SEM2` repository root as one Vercel project. The root `vercel.json` declares two Vercel services: the Vite frontend rooted at `client` and the Express backend rooted at `server`. Requests under `/api/*` are rewritten to the Express service; all other paths are rewritten to the frontend service.
 
 In the Vercel project settings, add these environment variables for Production (and Preview if needed):
 
