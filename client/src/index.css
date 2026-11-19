@@ -95,7 +95,29 @@ main table {
     white-space: nowrap;
   }
 
+  /* Keep the profile link available alongside the bottom navigation links. */
   nav.fixed.left-0 > div:nth-of-type(2) {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    padding: 0 0.35rem;
+    border-top: 0;
+  }
+
+  nav.fixed.left-0 > div:nth-of-type(2) > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  nav.fixed.left-0 > div:nth-of-type(2) img {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  nav.fixed.left-0 > div:nth-of-type(2) > a > div {
     display: none;
   }
 
