@@ -1,1 +1,165 @@
 @import "tailwindcss";
+
+/* Keep flex/grid children from forcing the app wider than the viewport. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+body {
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+#root > div {
+  min-height: 100vh;
+  min-width: 0;
+  width: 100%;
+}
+
+main {
+  min-width: 0;
+  max-width: 100%;
+}
+
+main > div.flex-1 {
+  min-width: 0;
+  padding: clamp(0.75rem, 2.4vw, 2rem);
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+/* Large data tables remain usable by scrolling inside their own container. */
+main table {
+  max-width: 100%;
+}
+
+@media (max-width: 767px) {
+  /* Turn the desktop sidebar into a compact, always-available bottom nav. */
+  nav.fixed.left-0 {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 40;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: calc(4.25rem + env(safe-area-inset-bottom));
+    padding: 0.35rem 0.5rem env(safe-area-inset-bottom);
+    border-right: 0;
+    border-top: 1px solid #e5e7eb;
+    box-shadow: 0 -4px 18px rgb(15 23 42 / 0.08);
+  }
+
+  nav.fixed.left-0 > a {
+    display: none;
+  }
+
+  nav.fixed.left-0 > div:nth-of-type(1) {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    gap: 0.25rem;
+    padding: 0;
+  }
+
+  nav.fixed.left-0 > div:nth-of-type(1) > a {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    min-width: 0;
+    padding: 0.45rem 0.15rem;
+    font-size: 0.68rem;
+    line-height: 1;
+  }
+
+  nav.fixed.left-0 > div:nth-of-type(1) > a span {
+    display: block !important;
+    white-space: nowrap;
+  }
+
+  nav.fixed.left-0 > div:nth-of-type(2) {
+    display: none;
+  }
+
+  main > div.flex-1 {
+    padding: 0.875rem 0.75rem calc(5.25rem + env(safe-area-inset-bottom));
+  }
+
+  header {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  /* Dashboard stats stay legible in two narrow columns. */
+  .grid-cols-2 > div {
+    min-width: 0;
+    padding: 0.875rem;
+  }
+
+  .grid-cols-2 > div p {
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+  }
+
+  .grid-cols-2 > div h3 {
+    font-size: 1.5rem;
+  }
+
+  /* Radar panel headings and item details can wrap instead of overflowing. */
+  .mt-8 .flex.items-center.justify-between,
+  .mt-8 .flex.justify-between.items-center {
+    gap: 0.65rem;
+  }
+
+  .mt-8 h3,
+  .mt-8 h4 {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 420px) {
+  main > div.flex-1 {
+    padding-right: 0.625rem;
+    padding-left: 0.625rem;
+  }
+
+  .grid-cols-2 {
+    gap: 0.55rem;
+  }
+
+  .grid-cols-2 > div {
+    padding: 0.7rem;
+  }
+
+  .mt-8 > div:first-child {
+    gap: 0.55rem;
+  }
+
+  .mt-8 > div:first-child h2 {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  main > div.flex-1 {
+    padding: 1.25rem;
+  }
+}
